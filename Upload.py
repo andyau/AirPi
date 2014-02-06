@@ -115,7 +115,7 @@ def mainUpload(stdscr):
 		if TGSEn:
 			AQADC = config.getint("TGS2600", "ADCPin")
 			pullup = config.getint("TGS2600", "PullUp")
-			airSensor = AQSensor.AQSensor(adc,AQADC,pullup)
+			airSensor = AQSensor.AQSensor(adc,AQADC,pullup=pullup)
 
 		# Get the MICS-2710 details from the config
                 NO2En = config.getboolean("MICS-2710", "Enabled")
