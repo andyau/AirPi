@@ -203,7 +203,8 @@ while True:
 			working = working and i.outputData(data)
 		if working:
 			print "Uploaded successfully"
-			GPIO.output(greenPin,GPIO.HIGH)
+			if greenPin:
+				GPIO.output(greenPin,GPIO.HIGH)
 		else:
 			print "Failed to upload"
 			if redPin:
