@@ -140,17 +140,21 @@ class HTTP(output.Output):
 					continue
 				# Date & Time, Unix Time, then sensors
 				try:
+					# copy data for our manipulations
+					data2 = list(data)
+					for i in range(0, len(data2)):
+						data2[i] = dict(data2[i])
 					t = [w.replace('None', '0') for w in row[1:]]
 					d = numpy.array(map(float, t))
 					now = d[0]
 					d = d[1:]
 					for i, val in enumerate(d):
-						data[i]["value"] = val
+						data2[i]["value"] = val
 					if self.historyCalibrated == 0:
-						dataPoints = self.cal.calibrate(data)
+						dataPoints = self.cal.calibrate(data2)
 					else:
-						dataPoints = data
-					self.recordData(data, now)
+						dataPoints = data2
+					self.recordData(dataPoints, now)
 				except ValueError:
 					row = row[2:]
 					data = []
